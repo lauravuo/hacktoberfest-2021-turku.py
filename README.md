@@ -26,18 +26,18 @@
 
 ### Team 1: licence-scan-go / Docker container action
 
-This group creates a licence scanner action for GoLang projects. The action is based on a Docker container.
+This group creates a licence scanner action for GoLang projects. The action is based on [a Docker container](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action).
 
 See step-by-step instructions in repository [licence-scan-go README](https://github.com/lauravuo/licence-scan-go#readme).
 
 ### Team 2: licence-scan-js / JavaScript action
 
-This group creates a licence scanner action for JavaScript/TypeScript projects. The action is implemented as JavaScript action.
+This group creates a licence scanner action for JavaScript/TypeScript projects. The action is implemented as [JavaScript action](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action).
 
 See step-by-step instructions in repository [licence-scan-js README](https://github.com/lauravuo/licence-scan-js#readme).
 
 ### Team 3: releaser-action / Composite action
 
-This group creates a licence scanner action for Javascript/TypeScript projects. The action is implemented as JavaScript action.
+This group creates an automatic releaser action for projects with development-main-branching style. The action is implemented as [a composite action](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action).
 
 See step-by-step instructions in repository [releaser-action README](https://github.com/lauravuo/releaser-action#readme).

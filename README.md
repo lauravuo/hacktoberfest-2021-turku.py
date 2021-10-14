@@ -1,5 +1,7 @@
 # Hacktoberfest 2021 event for Turku.py
 
+Before making any PRs remember to [register to Hacktoberfest](https://hacktoberfest.digitalocean.com/register) with your GitHub account in case you wish to participate to the PR hunting 🍁 
+
 ## Workshop Agenda
 
 - Let's divide to 3 groups that each will select one track

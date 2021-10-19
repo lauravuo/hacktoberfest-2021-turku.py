@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Building GitHub Actions for Findy Agency</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+      class: center, middle
+
+      .img-200[![Turku.py logo](https://turkupy.github.io/static/logo-e556aca72f8670e6571bdd474a461f90.png)]
+      .img-200[![Hacktoberfest logo](https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hacktoberfest-full.f42e3b1.svg)]
+
+      
+      # Building GitHub Actions for Findy Agency
+      
+      .author-box.small[Laura Vuorenoja<br> Technology Strategist @ OP Lab <br> [@lauravuo-techlab](https://github.com/lauravuo-techlab)<br> [@lauravuo](https://github.com/lauravuo)]
+      
+      ---
+      
+      # Agenda
+      
+      1. Introduction to [Findy Agency](https://findy-network.github.io/)
+      1. Introduction to [GitHub Actions](https://docs.github.com/en/actions)
+      1. Building own actions
+      1. Workshop time!
+      
+      ---
+
+      background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80)
+      background-size: cover
+      class: center padded-slide
+
+      # Findy Agency
+      
+      .box[Findy Agency is *an identity agent service* for individuals and organisations.]
+
+      --
+
+      .box[It provides functionality and APIs for utilizing *verified data networks*.]
+
+      ???
+      - Findy development team at OP Lab has been researching self-sovereign identity and verified data networks for almost three years now.
+      - Findy Agency project has been born as a side product of the research work, multiple PoCs, and demos around this technology.
+      - The project codes were published fully as open-source in summer 2021. 
+      ---
+
+      # Verified Data
+
+      .img-fill[![Trust Triangle](./img/trust-triangle.png)]
+
+      ???
+      - The idea of verified data networks is to utilize cryptography so that different identities can hold and prove facts about themselves digitally.
+      - The main concepts in verified data handling are
+        - Issuing credentials: signing facts and storing those in one's digital wallet
+        - Prooving credentials: generating proofs from the signed facts and presenting those to counterparties
+        
+      ---
+
+      .img-fill[![Findy Network Homepage](./img/findy-homepage.png)]
+      .center.small[[Findy Network](https://findy.fi)]
+
+      ???
+      - A public permissioned blockchain stores the shared data, such as the public keys of the credential issuers. Each network has a set of rules, how this data is maintained and updated.
+      - In Finland, we have a joint public-private effort, the Findy cooperative, aiming to run the national Findy network in the future.
+
+      ---
+
+      background-image: url(https://images.unsplash.com/photo-1536185436531-57cc12011899?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3271&q=80)
+      background-size: cover
+      class: center padded-slide
+
+      # Example: Alice Rents a Car
+
+      --
+
+      .box[Alice wants to rent a car.]
+
+      --
+
+      .box[Car rental service requests proof of Alice's driver's licence.]
+
+      --
+      
+      .box[Alice presents the proof from her digital wallet. Licence is issued by the police.]
+
+      --
+      
+      .box[Car rental service verifies the driver's licence.]
+
+      ???
+      - Alice wants to rent a car from the "Digital Car Rental" (DCR) service. The vehicle is parked in her home street, and she can unlock it using her mobile app once she has signed the rental agreement.
+      - DCR wants to verify that Alice has a valid driver's license before signing the agreement.
+      - Alice has a digital driver's license in her wallet. It is a verifiable credential issued by the police.
+      - DCR sends a proof request to Alice. DCR wants to have cryptographic proof of Alice's name and right to drive a car. Alice responds to the request by revealing these attributes from her driver's license with cryptographic proof. DCR can verify the proof and ensure that the police issued the data to Alice's wallet.
+      - Once the proof is verified, both parties sign the rental agreement, and Alice can unlock the car.
+
+      ---
+
+      background-image: url(https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80)
+      background-size: cover
+      class: center padded-slide
+
+      # Example: Bob and Doctor Dan
+
+      --
+
+      .box[Bob is booking an appointment with doctor Dan.]
+
+      --
+
+      .box[Bob wants Dan to prove that he is not a fake doctor.]
+      
+      --
+
+      .box[Bob makes a proof request for Dan's diploma.]
+
+      --
+
+      .box[Dan accepts the request and Bob can verify that Dan has graduated from a respected university.]
+
+      ???
+      - Bob is making a reservation with doctor Dan. He hasn't visited Dan before. He wants to ensure that the doctor is not fake and has a valid diploma from a respected university.
+      - Bob makes a proof request for Dan's diploma. Dan accepts the request, and Bob can verify that the claimed university issued Dan's certificate.
+      - Bob continues with the reservation as he now knows that the doctor is not fake.
+
+      ---
+      
+      background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80)
+      background-size: cover
+      class: center padded-slide
+
+      # Like Internet... but Better
+
+      --
+
+      .box[**Founding on trust and security**]
+
+      --
+
+      .box[**Boosting digitalization**]
+
+      --
+
+      .box[**Increasing privacy**]
+
+      --
+
+      .box[**Decoupling services**]
+
+      --
+
+      .box[**Streamlining implementations**]
+
+      ???
+      - Verified data networks aim to make the internet a more secure place.
+      - The use of verified data networks will enable the digitalization of use cases traditionally cumbersome to implement. It will also allow entirely new use cases.
+      - Privacy increases as end-users become the owners of their own data, and they may select which data they want to share.
+      - The need for custom integrations between organizations decreases as they can handle the needed data exchange through the network.
+
+      ---
+      
+      background-image: url(https://images.unsplash.com/uploads/1413222992504f1b734a6/1928e537?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80)
+      background-size: cover
+      class: center padded-slide
+
+      # Underlying Technologies
+
+      --
+
+      .box[[DIDComm](https://identity.foundation/didcomm-messaging/spec/)]
+
+      --
+
+      .box[[Hyperledger Aries](https://github.com/hyperledger/aries-rfcs)]
+
+      --
+
+      .box[[indy-sdk](https://github.com/hyperledger/indy-sdk) and Indy "AnonCreds"]
+
+      --
+
+      .box[[Indy Blockchain](https://wiki.hyperledger.org/display/indy)]
+
+      ???
+      - DIDComm-messaging is the foundation of all verified data communication. The DIDComm-connection is a secure messaging channel created by exchanging DIDs (identifiers for decentralized, digital identity).
+      - Hyperledger Aries defines the protocol by how identity agents communicate with each other.
+      - Indy-sdk provides the needed cryptographic functionality. It supports the Indy "AnonCreds" credential format.
+      - Digital identities are rooted in Hyperledger Indy blockchain, which works together with the indy-sdk-tools.
+
+      ---
+      
+      class: center
+      
+      # Findy Agency Architecture
+
+      .img-60percent[![Agency Architecture](./img/arch-overview.png)]
+
+      [Findy Agency](https://findy-network.github.io/)
+
+      ???
+
+      - Multitenant agency serving both individuals and organizations
+      - Exceptional cloud-first approach: credential data is stored and handled only in the server-side
+      - Secure passwordless authentication via WebAuthn
+      - Performant microservice architecture implemented with GoLang and gRPC
+      - Fully open-source
+
+
+      ---
+      
+      background-image: url(https://images.unsplash.com/photo-1618401479427-c8ef9465fbe1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1443&q=80)
+      background-size: cover
+      class: center padded-slide
+
+      # GitHub Actions
+
+      --
+
+      .box[CI/CD from GitHub]
+
+      --
+
+      .box[Automate almost anything]
+
+      --
+
+      .box[.github/workflows]
+
+      --
+
+      .box[Community-created actions]
+
+      --
+
+      .box[Creating own actions]
+
+      ???
+      - GitHub Actions is GitHub offering for CI (Continuos Integration) and CD (Continuos Delivery)
+      - You can automate almost anything with GitHub Actions, but typical tasks include
+        - Static code analysis
+        - Unit test execution
+        - e2e test execution
+        - Building project deliverables
+        - App deployment
+      - Workflow definitions reside in git repository, `.github`-folder
+      - One can use actions shared by other authors or craft the functionality themselves 
+
+      ---
+  
+      # GitHub Actions - example
+
+      .img-fill[![GitHub Actions example](./img/gh-action-example.png)]
+
+      [findy-agent workflows](https://github.com/findy-network/findy-agent/tree/master/.github/workflows)
+
+      ---
+    
+      # Building own GitHub Actions
+
+
+      ---
+    
+      # Workshop Time!
+
+      **Team 1: licence-scan-go / Docker container action**
+      
+      This group creates a licence scanner action for GoLang projects. The action is based on a Docker container.
+
+
+      **Team 2: licence-scan-js / JavaScript action**
+
+      This group creates a licence scanner action for JavaScript/TypeScript projects. The action is implemented as JavaScript action.
+
+      **Team 3: releaser-action / Composite action**
+
+      This group creates an automatic releaser action for projects with development-main-branching style. The action is implemented as a composite action.
+
+      [Start here](https://github.com/lauravuo/hacktoberfest-2021-turku.py#readme)
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
